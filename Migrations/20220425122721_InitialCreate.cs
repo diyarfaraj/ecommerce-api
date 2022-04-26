@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace KochiStockholm.Migrations
+namespace ecommerceApi.Migrations
 {
     public partial class InitialCreate : Migration
     {

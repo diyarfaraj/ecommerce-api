@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DiyarFaraj\\Desktop\\KochiStockholm\\KochiStockholm.csproj": {}
+    "C:\\Users\\DiyarFaraj\\Desktop\\ecommerce-api\\KochiStockholm.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DiyarFaraj\\Desktop\\KochiStockholm\\KochiStockholm.csproj": {
+    "C:\\Users\\DiyarFaraj\\Desktop\\ecommerce-api\\KochiStockholm.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DiyarFaraj\\Desktop\\KochiStockholm\\KochiStockholm.csproj",
+        "projectUniqueName": "C:\\Users\\DiyarFaraj\\Desktop\\ecommerce-api\\KochiStockholm.csproj",
         "projectName": "KochiStockholm",
-        "projectPath": "C:\\Users\\DiyarFaraj\\Desktop\\KochiStockholm\\KochiStockholm.csproj",
+        "projectPath": "C:\\Users\\DiyarFaraj\\Desktop\\ecommerce-api\\KochiStockholm.csproj",
         "packagesPath": "C:\\Users\\DiyarFaraj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DiyarFaraj\\Desktop\\KochiStockholm\\obj\\",
+        "outputPath": "C:\\Users\\DiyarFaraj\\Desktop\\ecommerce-api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DiyarFaraj\\AppData\\Roaming\\NuGet\\NuGet.Config",

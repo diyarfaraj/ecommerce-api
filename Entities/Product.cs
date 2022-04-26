@@ -1,4 +1,4 @@
-﻿namespace KochiStockholm.Entities
+﻿namespace ecommerceApi.Entities
 {
     public class Product
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using KochiStockholm.Entities;
+using ecommerceApi.Entities;
 
-namespace KochiStockholm.Data
+namespace ecommerceApi.Data
 {
     public static class DbInitializer
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace KochiStockholm
+namespace ecommerceApi
 {
     public class WeatherForecast
     {

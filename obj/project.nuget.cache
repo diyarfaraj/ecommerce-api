@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QjFL3QhEieBsG1YOkdOByMP10RyL719wPQGxKgLaTIruMn7Khzvm+QQWplvuUy2/hXughV3oIqGdtCvAyDp7BA==",
+  "dgSpecHash": "dTd8UYPRYU1phv6RPpHMOdmxEHtpyqsnOkvxHbsQhBCTllFlfEusMHBWegRWLTaaCz8E6zyJdjAqAfP+PfCFKw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DiyarFaraj\\Desktop\\KochiStockholm\\KochiStockholm.csproj",
+  "projectFilePath": "C:\\Users\\DiyarFaraj\\Desktop\\ecommerce-api\\ecommerceApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DiyarFaraj\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\DiyarFaraj\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

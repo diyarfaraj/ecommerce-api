@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KochiStockholm.Data;
-using KochiStockholm.Entities;
+using ecommerceApi.Data;
+using ecommerceApi.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace KochiStockholm.Controllers
+namespace ecommerceApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -14,7 +14,7 @@ namespace KochiStockholm.Controllers
     {
         private readonly StoreContext _context;
         public ProductsController(StoreContext context)
-        {
+        {   
             _context = context;
         }
 

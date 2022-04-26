@@ -1,7 +1,7 @@
-﻿using KochiStockholm.Entities;
+﻿using ecommerceApi.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace KochiStockholm.Data
+namespace ecommerceApi.Data
 {
     public class StoreContext : DbContext
     {
