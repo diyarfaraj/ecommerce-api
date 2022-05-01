@@ -32,7 +32,7 @@ namespace ecommerceApi
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {   
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "KochiStockholm", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ecommerceApi", Version = "v1" });
             });
             services.AddDbContext<StoreContext>(opt =>
             {
@@ -57,7 +57,7 @@ namespace ecommerceApi
 
             app.UseCors(opt =>
             {
-                opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+                opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000", "http://localhost:3001");
             });
 
             app.UseAuthorization();
