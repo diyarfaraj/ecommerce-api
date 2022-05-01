@@ -31,7 +31,7 @@ namespace ecommerceApi.Middleware
 
                 _logger.LogError(ex, ex.Message);
                 context.Response.ContentType = "application/json";
-                context.Response.StatusCode =  StatusCodes.Status500InternalServerError;
+                context.Response.StatusCode =  500;
 
                 var response = new ProblemDetails
                 {
