@@ -1261,11 +1261,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DiyarFaraj\\Desktop\\ecommerce-api\\ecommerceApi.csproj",
+      "projectUniqueName": "C:\\Users\\DiyarFaraj\\Desktop\\api\\ecommerce-api\\ecommerceApi.csproj",
       "projectName": "ecommerceApi",
-      "projectPath": "C:\\Users\\DiyarFaraj\\Desktop\\ecommerce-api\\ecommerceApi.csproj",
+      "projectPath": "C:\\Users\\DiyarFaraj\\Desktop\\api\\ecommerce-api\\ecommerceApi.csproj",
       "packagesPath": "C:\\Users\\DiyarFaraj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DiyarFaraj\\Desktop\\ecommerce-api\\obj\\",
+      "outputPath": "C:\\Users\\DiyarFaraj\\Desktop\\api\\ecommerce-api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DiyarFaraj\\AppData\\Roaming\\NuGet\\NuGet.Config",
