@@ -64,9 +64,14 @@ namespace ecommerceApi.Controllers
         public async Task<ActionResult> DeleteItemFromBasket(int productId, int quantity)
         {
             //get basket
+            var basket = await RetrieveBasket();
+            if(basket == null) return NotFound();
             //remove item or reduce
+            basket.RemoveItem(productId, quantity);
             //save changes
-            return Ok();
+            var result = await _context.SaveChangesAsync() > 0;
+            if (result) return Ok();
+            return BadRequest(new ProblemDetails { Title="Error removing from basket"});
         }
 
         private async Task<Basket> RetrieveBasket()
