@@ -64,8 +64,8 @@ namespace ecommerceApi.Controllers
         {
             return await _context.Baskets
                 .Include(basket => basket.Items)
-                .ThenInclude(p => p.Product)
-                .FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
+                .ThenInclude(p => p.Product).FirstOrDefaultAsync();
+                //.FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
         }
 
 
