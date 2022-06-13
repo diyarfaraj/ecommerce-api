@@ -62,10 +62,12 @@ namespace ecommerceApi.Controllers
 
         private async Task<Basket> RetrieveBasket()
         {
-            return await _context.Baskets
+            var result = await _context.Baskets
                 .Include(basket => basket.Items)
                 .ThenInclude(p => p.Product).FirstOrDefaultAsync();
-                //.FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
+            //.FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
+
+            return result;
         }
 
 

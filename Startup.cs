@@ -58,7 +58,7 @@ namespace ecommerceApi
 
             app.UseCors(opt =>
             {
-                opt.WithOrigins("http://localhost:3000")
+                opt.WithOrigins("http://localhost:3000", "https://localhost:3001")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
