@@ -64,8 +64,8 @@ namespace ecommerceApi.Controllers
         {
             var result = await _context.Baskets
                 .Include(basket => basket.Items)
-                .ThenInclude(p => p.Product).FirstOrDefaultAsync();
-            //.FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
+                .ThenInclude(p => p.Product)//.FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
 
             return result;
         }
@@ -78,7 +78,7 @@ namespace ecommerceApi.Controllers
             Response.Cookies.Append("buyerId", buyerId, cookieOptions); 
             
             //the only value thats needed for creating new basket is buyerId.
-            //Id is created incremently, and new empty list of items is created automatically
+             //Id is created incremently, and new empty list of items is created automatically
             var basket = new Basket { BuyerId = buyerId };
             _context.Baskets.Add(basket);
             return basket;
