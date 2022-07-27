@@ -2,14 +2,14 @@
 {
     public class PaginationParams
     {
-        private const int MaxPageSize = 50;
+        private const int MaxProductsPerPage = 50;
         public int PageNumber { get; set; } = 1;
 
-        private int _pageSize = 6;
-        public int PageSize
+        private int _productsPerPage = 6;
+        public int ProductsPerPage
         {
-            get => _pageSize;
-            set => _pageSize = value > MaxPageSize ? MaxPageSize : value;
+            get => _productsPerPage;
+            set => _productsPerPage = value > MaxProductsPerPage ? MaxProductsPerPage : value;
         }
 
     }
