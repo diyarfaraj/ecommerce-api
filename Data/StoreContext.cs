@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ecommerceApi.Data
 {
-    public class StoreContext : DbContext
+    public class StoreContext : IdentityDbContext
     {
         public StoreContext( DbContextOptions options) : base(options)
         {
