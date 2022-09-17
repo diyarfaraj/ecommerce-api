@@ -42,7 +42,10 @@ namespace ecommerceApi
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddCors();
-            services.AddIdentityCore<User>()
+            services.AddIdentityCore<User>(option =>
+            {
+                option.User.RequireUniqueEmail = true;
+            })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StoreContext>();
             services.AddAuthentication();
