@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ecommerceApi.Data;
 using ecommerceApi.Entities;
 using ecommerceApi.Middleware;
+using ecommerceApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -50,6 +51,7 @@ namespace ecommerceApi
                 .AddEntityFrameworkStores<StoreContext>();
             services.AddAuthentication();
             services.AddAuthorization();
+            services.AddScoped<TokenService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
