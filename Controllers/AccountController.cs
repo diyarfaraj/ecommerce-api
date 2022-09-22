@@ -58,7 +58,6 @@ namespace ecommerceApi.Controllers
             await _userManager.AddToRoleAsync(user, "Member");
             return StatusCode(201);
         }
-
         [Authorize]
         [HttpGet("currentUser")]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
