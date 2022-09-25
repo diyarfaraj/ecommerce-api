@@ -117,7 +117,7 @@ namespace ecommerceApi
                     .AllowCredentials();
                    
             });
-            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
