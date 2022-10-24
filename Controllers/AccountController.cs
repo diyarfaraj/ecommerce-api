@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
+using ecommerceApi.Data;
 using ecommerceApi.DTOs;
 using ecommerceApi.Entities;
 using ecommerceApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ecommerceApi.Controllers
 {
@@ -12,11 +14,13 @@ namespace ecommerceApi.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly TokenService _tokenService;
+        private readonly StoreContext _context;
 
-        public AccountController(UserManager<User> userManager, TokenService tokenService)
+        public AccountController(UserManager<User> userManager, TokenService tokenService, StoreContext context)
         {
             _userManager = userManager;
             _tokenService = tokenService;
+            _context = context;
         }
 
         [HttpPost("login")]
@@ -28,6 +32,8 @@ namespace ecommerceApi.Controllers
             {
                 return Unauthorized();
             }
+
+            var userBasket = 
 
             return new UserDto
             {
@@ -68,6 +74,21 @@ namespace ecommerceApi.Controllers
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user),
             };
+        }
+
+        private async Task<Basket> RetrieveBasket(string buyerId)
+        {
+            if (string.IsNullOrEmpty(buyerId))
+            {
+                Response.Cookies.Delete("buyerId");
+                return null;
+            }
+            var result = await _context.Baskets
+                .Include(basket => basket.Items)
+                .ThenInclude(p => p.Product)
+                .FirstOrDefaultAsync(x => x.BuyerId == buyerId);
+
+            return result;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ecommerceApi.Controllers
         [HttpGet(Name ="GetBasket")]
         public async Task<ActionResult<BasketDto>> GetBasket()
         {
-            var basket = await RetrieveBasket();
+            var basket = await RetrieveBasket(GetBuyerId());
             if (basket == null) return NotFound();
             return MapBasketToDto(basket);
         }
@@ -32,7 +32,7 @@ namespace ecommerceApi.Controllers
         [HttpPost] //api/basket?productId=3&quantity=2
         public async Task<ActionResult<BasketDto>> AddItemToBasket(int productId, int quantity)
         {
-            var basket = await RetrieveBasket();
+            var basket = await RetrieveBasket(GetBuyerId());
             if (basket == null) basket =  CreateBasket();
 
             var product = await _context.Products.FindAsync(productId);
@@ -50,7 +50,7 @@ namespace ecommerceApi.Controllers
         public async Task<ActionResult> DeleteItemFromBasket(int productId, int quantity)
         {
             //get basket
-            var basket = await RetrieveBasket();
+            var basket = await RetrieveBasket(GetBuyerId());
             if(basket == null) return NotFound();
             //remove item or reduce
             basket.RemoveItem(productId, quantity);
@@ -60,22 +60,38 @@ namespace ecommerceApi.Controllers
             return BadRequest(new ProblemDetails { Title="Error removing from basket"});
         }
 
-        private async Task<Basket> RetrieveBasket()
+        private async Task<Basket> RetrieveBasket(string buyerId)
         {
+            if (string.IsNullOrEmpty(buyerId))
+            {
+                Response.Cookies.Delete("buyerId");
+                return null;
+            }
             var result = await _context.Baskets
                 .Include(basket => basket.Items)
                 .ThenInclude(p => p.Product)//.FirstOrDefaultAsync();
-                .FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
+                .FirstOrDefaultAsync(x => x.BuyerId == buyerId);
 
             return result;
+        }
+
+        private string GetBuyerId()
+        {
+            return User.Identity?.Name ?? Request.Cookies["buyerId"];
         }
 
 
         private Basket CreateBasket()
         {
-            var buyerId = Guid.NewGuid().ToString();
-            var cookieOptions = new CookieOptions { IsEssential = true,Expires = DateTime.Now.AddDays(30)};
-            Response.Cookies.Append("buyerId", buyerId, cookieOptions); 
+            var buyerId = User.Identity?.Name;
+            if (string.IsNullOrEmpty(buyerId))
+            {
+                buyerId = Guid.NewGuid().ToString();
+
+                var cookieOptions = new CookieOptions { IsEssential = true, Expires = DateTime.Now.AddDays(30) };
+                Response.Cookies.Append("buyerId", buyerId, cookieOptions);
+            }
+          
             
             //the only value thats needed for creating new basket is buyerId.
              //Id is created incremently, and new empty list of items is created automatically
