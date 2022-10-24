@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ecommerceApi.Data;
 using ecommerceApi.DTOs;
 using ecommerceApi.Entities;
+using ecommerceApi.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace ecommerceApi.Controllers
         {
             var basket = await RetrieveBasket(GetBuyerId());
             if (basket == null) return NotFound();
-            return MapBasketToDto(basket);
+            return basket.MapBasketToDto();
         }
 
       
@@ -41,7 +42,7 @@ namespace ecommerceApi.Controllers
             basket.AddItem(product, quantity);
             
             var result = await _context.SaveChangesAsync() > 0;
-            if (result) return CreatedAtRoute("GetBasket", MapBasketToDto(basket));
+            if (result) return CreatedAtRoute("GetBasket", basket.MapBasketToDto());
             return BadRequest(new ProblemDetails { Title="Problem saving item to basket"});
         }
 
@@ -100,23 +101,5 @@ namespace ecommerceApi.Controllers
             return basket;
         }
 
-        private BasketDto MapBasketToDto(Basket basket)
-        {
-            return new BasketDto
-            {
-                Id = basket.Id,
-                BuyerId = basket.BuyerId,
-                Items = basket.Items.Select(item => new BasketItemDto
-                {
-                    ProductId = item.ProductId,
-                    Name = item.Product.Name,
-                    Price = item.Product.Price,
-                    PictureUrl = item.Product.ImgUrl,
-                    Type = item.Product.Type,
-                    Brand = item.Product.Brand,
-                    Quantity = item.Quantity,
-                }).ToList(),
-            };
-        }
     }
 }

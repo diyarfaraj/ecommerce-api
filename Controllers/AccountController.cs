@@ -2,6 +2,7 @@
 using ecommerceApi.Data;
 using ecommerceApi.DTOs;
 using ecommerceApi.Entities;
+using ecommerceApi.Extensions;
 using ecommerceApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -33,12 +34,24 @@ namespace ecommerceApi.Controllers
                 return Unauthorized();
             }
 
-            var userBasket = 
+            var userBasket = await RetrieveBasket(loginDto.Username);
+            var anonymousBasket = await RetrieveBasket(Request.Cookies["buyerId"]);
 
+            if(anonymousBasket != null)
+            {
+                if(userBasket != null)
+                {
+                    _context.Baskets.Remove(userBasket);
+                }
+                anonymousBasket.BuyerId = user.UserName;
+                Response.Cookies.Delete("buyerId");
+                await _context.SaveChangesAsync();
+            }
             return new UserDto
             {
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user),
+                Basket = anonymousBasket != null ? anonymousBasket.MapBasketToDto() : userBasket.MapBasketToDto()
             };
         }
 
