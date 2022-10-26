@@ -8,6 +8,11 @@ namespace ecommerceApi.Extensions
     {
         public static BasketDto MapBasketToDto( this Basket basket)
         {
+            if(basket == null)
+            {
+                return null;
+            }
+
             return new BasketDto
             {
                 Id = basket.Id,
