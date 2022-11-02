@@ -1,6 +1,10 @@
-﻿namespace ecommerceApi.Entities.OrderAggregate
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace ecommerceApi.Entities.OrderAggregate
 {
-    public class ShippingAdress
+    [Owned]
+    public class ShippingAdress : Address
     {
+
     }
 }

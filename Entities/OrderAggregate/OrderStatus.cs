@@ -1,6 +1,9 @@
 ﻿namespace ecommerceApi.Entities.OrderAggregate
 {
-    public class OrderStatus
+    public enum OrderStatus
     {
+        Pending,
+        PaymentReceived,
+        PaymentFailed
     }
 }
