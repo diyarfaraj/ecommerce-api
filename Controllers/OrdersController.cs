@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ecommerceApi.Data;
 using ecommerceApi.Entities.OrderAggregate;
@@ -19,12 +20,21 @@ namespace ecommerceApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Order>> GetOrders()
+        public async Task<ActionResult<List<Order>>> GetOrders()
         {
             return await _context.Orders
                 .Include(o => o.OrderItems)
                 .Where(x => x.BuyerId == User.Identity.Name)
                 .ToListAsync();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Order>> GetOrder(int id)
+        {
+            return await _context.Orders
+                .Include(x => x.OrderItems)
+                .Where(x => x.BuyerId == User.Identity.Name && x.Id == id)
+                .FirstOrDefaultAsync();
         }
     }
 }
