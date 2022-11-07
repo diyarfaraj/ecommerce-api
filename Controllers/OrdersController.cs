@@ -101,6 +101,8 @@ namespace ecommerceApi.Controllers
             var result = await _context.SaveChangesAsync() > 0;
 
             if (result) return CreatedAtRoute("GetOrder", new {id = order.Id}, order.Id);
+
+            return BadRequest("Problem creating order");
         }
     }
 }
