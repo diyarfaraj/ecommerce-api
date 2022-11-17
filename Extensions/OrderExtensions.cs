@@ -15,7 +15,10 @@ namespace ecommerceApi.Extensions
                     Id = order.Id,
                     BuyerId = order.BuyerId,
                     OrderDate = order.OrderDate,
-                    OrderStatus = 
+                    ShippingAdress = order.ShippingAdress,
+                    DeliveryFee = order.DeliveryFee,
+                    OrderItems = order.OrderItems,
+
                 });
         }
     }
