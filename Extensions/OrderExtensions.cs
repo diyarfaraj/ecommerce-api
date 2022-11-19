@@ -17,7 +17,13 @@ namespace ecommerceApi.Extensions
                     OrderDate = order.OrderDate,
                     ShippingAdress = order.ShippingAdress,
                     DeliveryFee = order.DeliveryFee,
-                    OrderItems = order.OrderItems,
+                    OrderStatus = order.OrderStatus.ToString(),
+                    Total = order.GetTotal(),
+                    SubTotal = order.SubTotal,
+                    OrderItems = order.OrderItems.Select(x => new OrderItemDto
+                    {
+                        ProductId 
+                    })
 
                 });
         }
