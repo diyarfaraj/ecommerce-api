@@ -20,10 +20,14 @@ namespace ecommerceApi.Extensions
                     OrderStatus = order.OrderStatus.ToString(),
                     Total = order.GetTotal(),
                     SubTotal = order.SubTotal,
-                    OrderItems = order.OrderItems.Select(x => new OrderItemDto
+                    OrderItems = order.OrderItems.Select(item => new OrderItemDto
                     {
-                        ProductId 
-                    })
+                        ProductId = item.ItemOrdered.ProductId,
+                        Name = item.ItemOrdered.Name,
+                        PictureUrl = item.ItemOrdered.PictureUrl,
+                        Price = item.Price,
+                        Quantity = item.Quantity
+                    }).ToList(),
 
                 });
         }

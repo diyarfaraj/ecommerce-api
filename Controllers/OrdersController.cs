@@ -23,10 +23,10 @@ namespace ecommerceApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Order>>> GetOrders()
+        public async Task<ActionResult<List<OrderTo>>> GetOrders()
         {
             return await _context.Orders
-                .Include(o => o.OrderItems)
+                .ProjectOrderToOrderDto()
                 .Where(x => x.BuyerId == User.Identity.Name)
                 .ToListAsync();
         }
