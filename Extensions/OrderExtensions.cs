@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using ecommerceApi.DTOs;
 using ecommerceApi.Entities.OrderAggregate;
+using Microsoft.EntityFrameworkCore;
 
 namespace ecommerceApi.Extensions
 {
@@ -28,8 +29,7 @@ namespace ecommerceApi.Extensions
                         Price = item.Price,
                         Quantity = item.Quantity
                     }).ToList(),
-
-                });
+                }).AsNoTracking();
         }
     }
 }
