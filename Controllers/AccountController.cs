@@ -92,6 +92,13 @@ namespace ecommerceApi.Controllers
             };
         }
 
+        [Authorize]
+        [HttpGet("savedAddress")]
+        public async Task<ActionResult<UserAddress>> GetSavedAddress()
+        {
+
+        }
+
         private async Task<Basket> RetrieveBasket(string buyerId)
         {
             if (string.IsNullOrEmpty(buyerId))
