@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using ecommerceApi.Data;
 using ecommerceApi.DTOs;
 using ecommerceApi.Entities;
@@ -96,7 +97,10 @@ namespace ecommerceApi.Controllers
         [HttpGet("savedAddress")]
         public async Task<ActionResult<UserAddress>> GetSavedAddress()
         {
-
+            return await _userManager.Users
+                .Where(x => x.UserName == User.Identity.Name)
+                .Select(user => user.Address)
+                .FirstOrDefaultAsync();
         }
 
         private async Task<Basket> RetrieveBasket(string buyerId)
