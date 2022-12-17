@@ -52,7 +52,7 @@ namespace ecommerceApi.Controllers
 
             foreach (var item in basket.Items)
             {
-                var productItem = await _context.Products.FindAsync(item.Id);
+                var productItem = await _context.Products.FindAsync(item.ProductId);
                 var itemOrdered = new ProductItemOrdered
                 {
                     ProductId = productItem.Id,
@@ -85,18 +85,20 @@ namespace ecommerceApi.Controllers
 
             if (orderDto.SaveAddress)
             {
-                var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
-                user.Address = new UserAddress
+                var user = await _context.Users
+                    .Include(a => a.Address)
+                    .FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
+                var address = new UserAddress
                 {
                     FullName = orderDto.ShippingAddress.FullName,
-                    Adress1 = orderDto.ShippingAddress.Adress1,
-                    Adress2 = orderDto.ShippingAddress.Adress2,
+                    Address1 = orderDto.ShippingAddress.Address1,
+                    Address2 = orderDto.ShippingAddress.Address2,
                     City = orderDto.ShippingAddress.City,
                     Country = orderDto.ShippingAddress.Country,
                     Zip = orderDto.ShippingAddress.Zip,
                     State = orderDto.ShippingAddress.State,
                 };
-                _context.Update(user);
+                user.Address = address;
             }
             var result = await _context.SaveChangesAsync() > 0;
 
