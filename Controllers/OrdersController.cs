@@ -76,7 +76,7 @@ namespace ecommerceApi.Controllers
             {
                 OrderItems = items,
                 BuyerId = User.Identity.Name,
-                ShippingAdress = orderDto.ShippingAddress,
+                ShippingAdress = orderDto.ShippingAdress,
                 SubTotal = subTotal,
                 DeliveryFee = deliveryFee,
             };
@@ -90,13 +90,13 @@ namespace ecommerceApi.Controllers
                     .FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
                 var address = new UserAddress
                 {
-                    FullName = orderDto.ShippingAddress.FullName,
-                    Address1 = orderDto.ShippingAddress.Address1,
-                    Address2 = orderDto.ShippingAddress.Address2,
-                    City = orderDto.ShippingAddress.City,
-                    Country = orderDto.ShippingAddress.Country,
-                    Zip = orderDto.ShippingAddress.Zip,
-                    State = orderDto.ShippingAddress.State,
+                    FullName = orderDto.ShippingAdress.FullName,
+                    Address1 = orderDto.ShippingAdress.Address1,
+                    Address2 = orderDto.ShippingAdress.Address2,
+                    City = orderDto.ShippingAdress.City,
+                    Country = orderDto.ShippingAdress.Country,
+                    Zip = orderDto.ShippingAdress.Zip,
+                    State = orderDto.ShippingAdress.State,
                 };
                 user.Address = address;
             }
