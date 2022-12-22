@@ -11,7 +11,7 @@ namespace ecommerceApi.Entities.OrderAggregate
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public List<OrderItem> OrderItems { get; set; }
         public long SubTotal { get; set; }
-        public long DeliveryFee { get; set; }
+        public long DeliveryFee { get; set; } 
         public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
         public string PaymentIntentId { get; set; }
 
