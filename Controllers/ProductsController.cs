@@ -41,7 +41,7 @@ namespace ecommerceApi.Controllers
         {
             var product= await _context.Products.FindAsync(id); 
           if (product == null) return NotFound();
-          return Ok(product);
+          return product;
         }
 
         [HttpGet("filters")]
