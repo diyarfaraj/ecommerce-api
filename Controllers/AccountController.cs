@@ -110,6 +110,7 @@ namespace ecommerceApi.Controllers
                 Response.Cookies.Delete("buyerId");
                 return null;
             }
+            // TODO: bug when loggin in first time, basket is empty
             var result = await _context.Baskets
                 .Include(basket => basket.Items)
                 .ThenInclude(p => p.Product)
