@@ -13,6 +13,8 @@ namespace ecommerceApi.Extensions
             {
                 Id = basket.Id,
                 BuyerId = basket.BuyerId,
+                PaymentIntentId = basket.PaymentIntentId,
+                ClientScret = basket.ClientSecret,
                 Items = basket.Items.Select(item => new BasketItemDto
                 {
                     ProductId = item.ProductId,
