@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "F8QNWYBdiAtYK19TG/6+nYIDdpT/bBJtf6lQIe5hL21uIUqPmTb7tNXAdAxuWli7GZRSkklJh/zF8ARoX5LsXA==",
+  "dgSpecHash": "2eyEMIapwes4YcWJxXWi+91AWuOfbq/KfjNR/+d6DRNhu8RSSJbd2/++4TmMo/PiX0qEGIYM5rlIXez7taJy5g==",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\Documents\\projects\\ecommerce-api\\ecommerceApi.csproj",
   "expectedPackageFiles": [
@@ -62,6 +62,7 @@
     "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
