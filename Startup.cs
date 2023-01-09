@@ -7,6 +7,7 @@ using ecommerceApi.Data;
 using ecommerceApi.Entities;
 using ecommerceApi.Middleware;
 using ecommerceApi.Services;
+using ecommerceApi.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -89,11 +90,27 @@ namespace ecommerceApi
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding
                             .UTF8.GetBytes(Configuration["JWTSettings:TokenKey"]))
                     };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            var accessToken = context.Request.Query["access_token"];
+                            var path = context.HttpContext.Request.Path;
+
+                            if(!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+                            {
+                                context.Token = accessToken;
+                            }
+
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
 
             services.AddAuthorization();
             services.AddScoped<TokenService>();
             services.AddScoped<PaymentService>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -124,6 +141,7 @@ namespace ecommerceApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
             });
         }
     }
