@@ -17,7 +17,7 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 - script: |
     sudo apt update
-    sudo apt install dotnet-sdk-5.0
+    sudo apt install dotnet-sdk-5.0-linux-x64
   displayName: 'Install .NET Core 5.0'
 - script: cd ecommerceApi.Tests && dotnet test
   displayName: 'run tests'
