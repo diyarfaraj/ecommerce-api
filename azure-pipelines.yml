@@ -19,5 +19,4 @@ steps:
   displayName: 'Run tests'
   inputs:
     command: test
-    projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
