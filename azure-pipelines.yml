@@ -17,5 +17,5 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 - script: dotnet restore
   displayName: 'dotnet restore'
-- script: dotnet test
+- script: dotnet test --runtime net5.0
   displayName: 'dotnet test'
