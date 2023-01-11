@@ -20,5 +20,5 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 - script: dotnet restore
   displayName: 'dotnet restore'
-- script: dotnet test
+- script: cd ecommerceApi.Tests && dotnet test
   displayName: 'dotnet test'
