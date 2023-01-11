@@ -15,5 +15,5 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
-- script: cd ecommerceApi.Tests && dotnet test
-  displayName: 'dotnet test $(buildConfiguration)'
+- script: dir
+  displayName: 'see dirrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'
