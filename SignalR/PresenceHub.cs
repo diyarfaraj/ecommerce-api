@@ -7,6 +7,7 @@ namespace ecommerceApi.SignalR
 {
     public class PresenceHub : Hub
     {
+        //TODO: Not yet fully implemented
         public override async Task OnConnectedAsync()
         {
             await Clients.Others.SendAsync("UserIsOnline", Context.User.GetUsername());
