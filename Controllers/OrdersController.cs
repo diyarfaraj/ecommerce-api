@@ -79,6 +79,7 @@ namespace ecommerceApi.Controllers
                 ShippingAdress = orderDto.ShippingAdress,
                 SubTotal = subTotal,
                 DeliveryFee = deliveryFee,
+                PaymentIntentId = basket.PaymentIntentId
             };
             _context.Orders.Add(order);
             _context.Baskets.Remove(basket);
