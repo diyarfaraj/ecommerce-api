@@ -6,6 +6,7 @@ using ecommerceApi.Data;
 using ecommerceApi.Entities;
 using ecommerceApi.Extensions;
 using ecommerceApi.RequestHelpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -52,5 +53,7 @@ namespace ecommerceApi.Controllers
 
             return Ok(new { brands, types });
         }
+
+        [Authorize]
     }
 }
