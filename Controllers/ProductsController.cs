@@ -6,6 +6,7 @@ using ecommerceApi.Data;
 using ecommerceApi.Entities;
 using ecommerceApi.Extensions;
 using ecommerceApi.RequestHelpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,7 +37,7 @@ namespace ecommerceApi.Controllers
             return products;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name ="GetSingelProduct")]
         public async Task<ActionResult<Product>> GetSingleProduct(int id)
         {
             var product= await _context.Products.FindAsync(id); 
@@ -51,6 +52,19 @@ namespace ecommerceApi.Controllers
             var types = await _context.Products.Select(p => p.Type).Distinct().ToListAsync();
 
             return Ok(new { brands, types });
+        }
+
+        [Authorize(Roles ="Admin")]
+        [HttpPost]
+        public async Task<ActionResult<Product>> CreateProduct(Product product)
+        {
+            _context.Products.Add(product);
+
+            var result = await _context.SaveChangesAsync() > 0;
+
+            if (result) return CreatedAtRoute("GetSingelProduct", new { Id = product.Id }, product);
+
+            return BadRequest(new ProblemDetails { Title = "Problem creatin new product", });
         }
     }
 }

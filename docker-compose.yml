@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+  api:
+    image: mcr.microsoft.com/dotnet/aspnet:5.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    command: bash -c "dotnet ef database update --project ./ecommerceApi/ecommerceApi.csproj && dotnet run --project ./ecommerceApi/ecommerceApi.csproj"
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=mssql;Database=MyDatabase;User ID=sa;Password=Password_01;Trusted_Connection=False;Encrypt=True;MultipleActiveResultSets=true"
+    depends_on:
+      - db
+  db:
+    image: advitec/mssql-server-windows-developer
+    environment:
+      SA_PASSWORD: Password_01
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    container_name: mssql
