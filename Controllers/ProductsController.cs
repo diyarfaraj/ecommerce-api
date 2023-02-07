@@ -37,7 +37,7 @@ namespace ecommerceApi.Controllers
             return products;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name ="GetSingelProduct")]
         public async Task<ActionResult<Product>> GetSingleProduct(int id)
         {
             var product= await _context.Products.FindAsync(id); 
@@ -54,6 +54,17 @@ namespace ecommerceApi.Controllers
             return Ok(new { brands, types });
         }
 
-        [Authorize]
+        [Authorize(Roles ="Admin")]
+        [HttpPost]
+        public async Task<ActionResult<Product>> CreateProduct(Product product)
+        {
+            _context.Products.Add(product);
+
+            var result = await _context.SaveChangesAsync() > 0;
+
+            if (result) return CreatedAtRoute("GetSingelProduct", new { Id = product.Id }, product);
+
+            return BadRequest(new ProblemDetails { Title = "Problem creatin new product", });
+        }
     }
 }
