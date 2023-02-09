@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ecommerceApi.Data;
+using ecommerceApi.DTOs;
 using ecommerceApi.Entities;
 using ecommerceApi.Extensions;
 using ecommerceApi.RequestHelpers;
@@ -56,7 +57,7 @@ namespace ecommerceApi.Controllers
 
         [Authorize(Roles ="Admin")]
         [HttpPost]
-        public async Task<ActionResult<Product>> CreateProduct(Product product)
+        public async Task<ActionResult<Product>> CreateProduct(CreateProductDto productDto)
         {
             _context.Products.Add(product);
 
