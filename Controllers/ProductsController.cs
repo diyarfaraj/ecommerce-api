@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AutoMapper;
 using ecommerceApi.Data;
 using ecommerceApi.DTOs;
 using ecommerceApi.Entities;
@@ -16,9 +17,12 @@ namespace ecommerceApi.Controllers
     public class ProductsController : BaseApiController
     {
         private readonly StoreContext _context;
-        public ProductsController(StoreContext context)
+        private readonly IMapper _mapper;
+
+        public ProductsController(StoreContext context, IMapper mapper)
         {   
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -56,9 +60,9 @@ namespace ecommerceApi.Controllers
         }
 
         [Authorize(Roles ="Admin")]
-        [HttpPost]
-        public async Task<ActionResult<Product>> CreateProduct(CreateProductDto productDto)
+        [HttpPost]        public async Task<ActionResult<Product>> CreateProduct(CreateProductDto productDto)
         {
+            var product = _mapper.Map<Product>(productDto);
             _context.Products.Add(product);
 
             var result = await _context.SaveChangesAsync() > 0;

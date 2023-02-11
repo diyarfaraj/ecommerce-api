@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ecommerceApi.Data;
 using ecommerceApi.Entities;
 using ecommerceApi.Middleware;
+using ecommerceApi.RequestHelpers;
 using ecommerceApi.Services;
 using ecommerceApi.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,6 +33,7 @@ namespace ecommerceApi
         {
 
             services.AddControllers();
+            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddSwaggerGen(c =>
             {   
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ecommerceApi", Version = "v1" });

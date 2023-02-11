@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Stripe;
 using ecommerceApi.RequestHelpers;
+using AutoMapper;
 
 namespace ecommerceApi.UnitTests
 {
@@ -15,6 +16,7 @@ namespace ecommerceApi.UnitTests
     {
         private readonly StoreContext _context;
         private readonly ProductsController _controller;
+        private readonly Mapper _mapper;
         public ProductsControllerTests()
         {
             var options = new DbContextOptionsBuilder<StoreContext>()
@@ -22,7 +24,7 @@ namespace ecommerceApi.UnitTests
                 .Options;
 
             _context = new StoreContext(options);
-            _controller = new ProductsController(_context);
+            _controller = new ProductsController(_context, _mapper);
 
             // Seed database with test data
             SeedTestData();
