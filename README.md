@@ -13,7 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installation
 
-1. Clone the repository to your local machine using `git clone https://github.com/[username]/ecommerce-api.git`
+1. Clone the repository to your local machine using `git clone https://github.com/diyarfaraj/ecommerce-api.git`
 
 2. Navigate to the cloned directory using `cd ecommerce-api`
 
