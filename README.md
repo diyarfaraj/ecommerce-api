@@ -17,9 +17,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 2. Navigate to the cloned directory using `cd ecommerce-api`
 
-3. Build the Docker image using the following command: docker build -t ecommerce-api .
+3. Build the Docker image using the following command: `docker build -t ecommerce-api .`
 
-4. Run the Docker container using the following command: docker run -d -p 5000:80 --name ecommerce-api ecommerce-api
+4. Run the Docker container using the following command: `docker run -d -p 5000:80 --name ecommerce-api ecommerce-api`
 
 
 The API should now be running on `http://localhost:5000/api/`.
