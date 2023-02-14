@@ -9,6 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 - [Docker](https://www.docker.com/products/docker-desktop)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 - [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
 
 ### Installation
@@ -17,9 +18,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 2. Navigate to the cloned directory using `cd ecommerce-api`
 
-3. Build the Docker image using the following command: `docker build -t ecommerce-api .`
+3. Build and run the Docker containers using the following command: `docker-compose up -d`
 
-4. Run the Docker container using the following command: `docker run -d -p 5000:80 --name ecommerce-api ecommerce-api`
+4. To stop the containers use the following command: `docker-compose down`
 
 
 The API should now be running on `http://localhost:5000/api/`.
