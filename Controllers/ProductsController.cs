@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using ecommerceApi.Data;
 using ecommerceApi.DTOs;
 using ecommerceApi.Entities;
@@ -12,6 +8,9 @@ using ecommerceApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ecommerceApi.Controllers
 {
@@ -76,6 +75,9 @@ namespace ecommerceApi.Controllers
                     return BadRequest(new ProblemDetails { Title = imageResult.Error.Message });
                 }
 
+                if (!string.IsNullOrEmpty(product.PublicId)) 
+                    await _imageService.DeleteImageAsync(product.PublicId);
+
                 product.ImgUrl = imageResult.SecureUrl.ToString();
                 product.PublicId = imageResult.PublicId;
             }
@@ -91,17 +93,20 @@ namespace ecommerceApi.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut]
-        public async Task<ActionResult> UpdateProduct(UpdateProductDto productDto)
+        public async Task<ActionResult<Product>> UpdateProduct([FromForm]UpdateProductDto productDto)
         {
             var product = await _context.Products.FindAsync(productDto.Id);
 
             if (product == null) return NotFound();
 
+            if (!string.IsNullOrEmpty(product.PublicId))
+                await _imageService.DeleteImageAsync(product.PublicId);
+
             _mapper.Map(productDto, product);
 
             var result = await _context.SaveChangesAsync() > 0;
 
-            if (result) return NoContent();
+            if (result) return Ok(product);
 
             return BadRequest(new ProblemDetails { Title = "Problem updating product", });
         }
