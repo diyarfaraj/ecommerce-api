@@ -15,7 +15,7 @@ namespace ecommerceApi.DTOs
         [Range(1,Double.PositiveInfinity)]
         public long Price { get; set; }
         [Required]
-        public IFormFile ImgFile { get; set; }
+        public IFormFile File { get; set; }
         [Required]
 
         public string Type { get; set; }

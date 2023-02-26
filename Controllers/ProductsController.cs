@@ -66,9 +66,9 @@ namespace ecommerceApi.Controllers
         {
             var product = _mapper.Map<Product>(productDto);
 
-            if(productDto.ImgFile != null)
+            if(productDto.File != null)
             {
-                var imageResult = await _imageService.AddImageAsync(productDto.ImgFile);
+                var imageResult = await _imageService.AddImageAsync(productDto.File);
                 
                 if(imageResult.Error != null)
                 {
@@ -99,10 +99,21 @@ namespace ecommerceApi.Controllers
 
             if (product == null) return NotFound();
 
-            if (!string.IsNullOrEmpty(product.PublicId))
-                await _imageService.DeleteImageAsync(product.PublicId);
-
             _mapper.Map(productDto, product);
+
+            if (productDto.File != null)
+            {
+                var imageUploadResult = await _imageService.AddImageAsync(productDto.File);
+
+                if (imageUploadResult.Error != null)
+                    return BadRequest(new ProblemDetails { Title = imageUploadResult.Error.Message });
+
+                if (!string.IsNullOrEmpty(product.PublicId))
+                    await _imageService.DeleteImageAsync(product.PublicId);
+
+                product.ImgUrl = imageUploadResult.SecureUrl.ToString();
+                product.PublicId = imageUploadResult.PublicId;
+            }
 
             var result = await _context.SaveChangesAsync() > 0;
 
