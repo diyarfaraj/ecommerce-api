@@ -1,6 +1,6 @@
 # ecommerce-api
 
-Ecommerce-api is a .NET 5 RESTful API built to provide a platform for online shopping. This API is designed to be used with Docker or just run in debug mode in Visual Studio, making it easy to deploy and run in a variety of environments.
+Ecommerce-api is a .NET 7 RESTful API built to provide a platform for online shopping. This API is designed to be used with Docker or just run in debug mode in Visual Studio, making it easy to deploy and run in a variety of environments.
 
 ## Getting Started
 
@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Docker Compose](https://docs.docker.com/compose/install/)
-- [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
+- [.NET 7 SDK](https://dotnet.microsoft.com/download/dotnet/7.0)
 
 ### Installation
 
