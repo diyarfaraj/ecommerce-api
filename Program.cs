@@ -153,4 +153,4 @@ catch (Exception ex)
     logger.LogError(ex, "A problem occurred during migration");
 }
 
-app.Run();
+app.Run("http://0.0.0.0:5000");
