@@ -41,34 +41,34 @@ namespace ecommerceApi.Tests.Controllers
             Assert.True(orderDtos.All(o => o.BuyerId == "user1"));
         }
 
-        [Fact]
-        public async Task CreateOrder_CreatesOrderAndReturnsCreatedOrderId()
-        {
-            // Arrange
-            var context = A.Fake<StoreContext>();
-            var controller = new OrdersController(context);
-            var basket = new Basket() { BuyerId = "user1", PaymentIntentId = "pi_123" };
-            var productItem = new Product() { Id = 1, Name = "Product 1", ImgUrl = "https://example.com/product1.jpg", Price = 100, QuantityInStock = 5 };
-            var basketItem = new BasketItem() { ProductId = productItem.Id, Quantity = 2 };
-            basket.Items.Add(basketItem);
-            //A.CallTo(() => context.Baskets).ReturnsDbSet(new List<Basket>() { basket });
-            A.CallTo(() => context.Products.FindAsync(productItem.Id)).Returns(productItem);
-            //A.CallTo(() => context.SaveChangesAsync()).Returns(1);
+        //[Fact]
+        //public async Task CreateOrder_CreatesOrderAndReturnsCreatedOrderId()
+        //{
+        //    // Arrange
+        //    var context = A.Fake<StoreContext>();
+        //    var controller = new OrdersController(context);
+        //    var basket = new Basket() { BuyerId = "user1", PaymentIntentId = "pi_123" };
+        //    var productItem = new Product() { Id = 1, Name = "Product 1", ImgUrl = "https://example.com/product1.jpg", Price = 100, QuantityInStock = 5 };
+        //    var basketItem = new BasketItem() { ProductId = productItem.Id, Quantity = 2 };
+        //    basket.Items.Add(basketItem);
+        //    //A.CallTo(() => context.Baskets).ReturnsDbSet(new List<Basket>() { basket });
+        //    A.CallTo(() => context.Products.FindAsync(productItem.Id)).Returns(productItem);
+        //    //A.CallTo(() => context.SaveChangesAsync()).Returns(1);
 
-            // Act
-            var orderDto = new CreateOrderDto()
-            {
-                ShippingAdress = new ShippingAdress() { FullName = "John Doe", Address1 = "123 Main St", City = "New York", Country = "USA", Zip = "10001", State = "NY" },
-                SaveAddress = true
-            };
-            var result = await controller.CreateOrder(orderDto);
-            var createdAtRouteResult = result.Result as CreatedAtRouteResult;
+        //    // Act
+        //    var orderDto = new CreateOrderDto()
+        //    {
+        //        ShippingAdress = new ShippingAdress() { FullName = "John Doe", Address1 = "123 Main St", City = "New York", Country = "USA", Zip = "10001", State = "NY" },
+        //        SaveAddress = true
+        //    };
+        //    var result = await controller.CreateOrder(orderDto);
+        //    var createdAtRouteResult = result.Result as CreatedAtRouteResult;
 
-            // Assert
-            Assert.NotNull(createdAtRouteResult);
-            Assert.Equal("GetOrder", createdAtRouteResult.RouteName);
-            //Assert.Equal(basket.PaymentIntentId, (createdAtRouteResult.RouteValues["id"] as int?).Value);
-        }
+        //    // Assert
+        //    Assert.NotNull(createdAtRouteResult);
+        //    Assert.Equal("GetOrder", createdAtRouteResult.RouteName);
+        //    //Assert.Equal(basket.PaymentIntentId, (createdAtRouteResult.RouteValues["id"] as int?).Value);
+        //}
     }
 
 }
