@@ -1,57 +1,106 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using ecommerceApi.Controllers;
 using ecommerceApi.Data;
 using ecommerceApi.DTOs;
 using ecommerceApi.Entities.OrderAggregate;
-using ecommerceApi.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
-using FakeItEasy;
-using ecommerceApi.Controllers;
-using ecommerceApi.Entities;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace ecommerceApi.Tests
+namespace ecommerceApi.Tests.Controllers
 {
     public class OrdersControllerTests
     {
-        private readonly IdentityDbContext<User, Role, int> _context;
         private readonly OrdersController _controller;
+        private readonly StoreContext _context;
 
         public OrdersControllerTests()
         {
-            _context = A.Fake<IdentityDbContext<User, Role, int>>();
-            A.CallTo(() => _context.Set<Order>()).Returns(new List<Order>
-        {
-            new Order { Id = 1 },
-            new Order { Id = 2 }
-        }.AsQueryable());
-            // Configure other DbSets here
+            var options = new DbContextOptionsBuilder<StoreContext>()
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .Options;
 
+            _context = new StoreContext(options);
             _controller = new OrdersController(_context);
         }
+
         [Fact]
-        public async Task GetOrders_ReturnsListOfOrderDtos()
+        public async Task GetOrders_ReturnsOrdersForAuthenticatedUser()
         {
             // Arrange
-            var orders = new List<OrderDto>
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
             {
-                new OrderDto { Id = 1 },
-                new OrderDto { Id = 2 }
+                new Claim(ClaimTypes.Name, "TestUser"),
+            }));
+
+            _context.Orders.Add(new Order
+            {
+                BuyerId = "TestUser",
+                OrderItems = new List<OrderItem> { new OrderItem() },
+                SubTotal = 100,
+                DeliveryFee = 10,
+                OrderDate = DateTime.UtcNow, // Add this line
+                ShippingAdress = new ShippingAdress // Add this line
+                {
+                    FullName = "John Doe",
+                    Address1 = "123 Main St",
+                    City = "New York",
+                    Country = "USA",
+                    Zip = "10001",
+                    State = "NY"
+                },
+                OrderStatus = OrderStatus.Pending // Add this line
+            });
+            _context.Orders.Add(new Order
+            {
+                BuyerId = "AnotherUser",
+                OrderItems = new List<OrderItem> { new OrderItem() },
+                SubTotal = 200,
+                DeliveryFee = 20,
+                OrderDate = DateTime.UtcNow, // Add this line
+                ShippingAdress = new ShippingAdress // Add this line
+                {
+                    FullName = "Jane Doe",
+                    Address1 = "456 Main St",
+                    City = "Los Angeles",
+                    Country = "USA",
+                    Zip = "90001",
+                    State = "CA"
+                },
+                OrderStatus = OrderStatus.Pending // Add this line
+            });
+            await _context.SaveChangesAsync();
+
+            _controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext { User = user }
             };
 
-            A.CallTo(() => _context.Orders.ProjectOrderToOrderDto())
-                .Returns(orders.AsQueryable());
-
             // Act
-            var result = await _controller.GetOrders();
+            ActionResult<List<OrderDto>> result;
+            try
+            {
+                result = await _controller.GetOrders();
+            }
+            catch (Exception ex)
+            {
+                // Print the exception details
+                Console.WriteLine("Exception: " + ex);
+                throw;
+            }
+
 
             // Assert
+            Assert.NotNull(result);
             var actionResult = Assert.IsType<ActionResult<List<OrderDto>>>(result);
-            var model = Assert.IsAssignableFrom<List<OrderDto>>(actionResult.Value);
-            Assert.Equal(2, model.Count);
+            var orders = Assert.IsType<List<OrderDto>>(actionResult.Value);
+            Assert.Single(orders);
+            Assert.Equal("TestUser", orders.First().BuyerId);
         }
     }
 }
