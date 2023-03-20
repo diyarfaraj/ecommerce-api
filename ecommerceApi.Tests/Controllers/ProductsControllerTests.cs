@@ -32,24 +32,6 @@ namespace ecommerceApi.UnitTests
             SeedTestData();
         }
 
-        //[Fact]
-        //public async Task Test_GetProducts_Returns_CorrectResults()
-        //{
-        //    // Arrange
-        //    var productParams = new ProductParams { PageNumber = 1, ProductsPerPage = 2 };
-        //    // Act
-        //    var result = await _controller.GetProducts(productParams);
-        //    var products = result.Value;
-
-        //    // Assert
-        //    Assert.Equal(2, products.Count);
-        //    Assert.Equal(1, products[0].Id);
-        //    Assert.Equal("Product 1", products[0].Name);
-        //    Assert.Equal(2, products[1].Id);
-        //    Assert.Equal("Product 2", products[1].Name);
-
-        //}
-
             [Fact]
         public async Task Test_GetSingleProduct_Returns_CorrectProduct()
         {
