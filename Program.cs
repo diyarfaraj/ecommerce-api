@@ -127,7 +127,7 @@ app.UseStaticFiles();
 
 app.UseCors(opt =>
 {
-    opt.WithOrigins("http://localhost:3000", "https://localhost:3001")
+    opt.WithOrigins("http://localhost:3000", "https://localhost:3001", "https://ecommerce-client-diyar.azurewebsites.net")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
@@ -143,14 +143,14 @@ var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<StoreContext>();
 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-try
-{
-    await context.Database.MigrateAsync();
-    await DbInitializer.Initialize(context, userManager);
-}
-catch (Exception ex)
-{
-    logger.LogError(ex, "A problem occurred during migration");
-}
+//try
+//{
+//    await context.Database.MigrateAsync();
+//    await DbInitializer.Initialize(context, userManager);
+//}
+//catch (Exception ex)
+//{
+//    logger.LogError(ex, "A problem occurred during migration");
+//}
 
-app.Run("http://0.0.0.0:5000");
+app.Run();
