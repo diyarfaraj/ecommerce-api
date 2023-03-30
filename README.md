@@ -2,6 +2,8 @@
 
 Ecommerce-api is a .NET 7 RESTful API built to provide a platform for online shopping. This API is designed to be used with Docker or just run in debug mode in Visual Studio, making it easy to deploy and run in a variety of environments.
 
+See [demo]https://ecommerce-client-diyar.azurewebsites.net/)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
